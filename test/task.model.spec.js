@@ -34,7 +34,7 @@ describe('Task', function () {
         expect(task.timeRemaining).to.equal(Infinity);
       });
 
-      xit('returns the difference between due date and now', function() {
+      it('returns the difference between due date and now', function() {
         var oneDay = 24 * 60 * 60 * 1000; // one day in milliseconds
 
         // create a task due one day from this point in time
@@ -49,14 +49,14 @@ describe('Task', function () {
 
     describe('overdue', function() {
 
-      xit('is overdue if the due date is in the past', function() {
+      it('is overdue if the due date is in the past', function() {
         var task = Task.build({
           due: helper.dates.yesterday()
         });
         expect(task.overdue).to.be.true;
       });
 
-      xit('is not overdue if the due date is in the past but complete is true', function() {
+      it('is not overdue if the due date is in the past but complete is true', function() {
         var task = Task.build({
           due: helper.dates.yesterday(),
           complete: true
@@ -64,7 +64,7 @@ describe('Task', function () {
         expect(task.overdue).to.be.false;
       });
 
-      xit('is not overdue if the due date is in the future', function() {
+      it('is not overdue if the due date is in the future', function() {
         var task = Task.build({
           due: helper.dates.tomorrow()
         });
@@ -85,7 +85,7 @@ describe('Task', function () {
     });
 
     describe('clearCompleted', function(){
-      xit('removes all completed tasks from the database', function(){
+      it('removes all completed tasks from the database', function(){
         return Task.clearCompleted()
           .then(function() {
             return Task.findAll({ where: { complete: true } });
@@ -103,7 +103,7 @@ describe('Task', function () {
 
     describe('completeAll', function(){
 
-      xit('marks all incomplete tasks as completed', function(){
+      it('marks all incomplete tasks as completed', function(){
         return Task.completeAll()
           .then(function() {
             return Task.findAll({ where: { complete: false } });
@@ -136,7 +136,7 @@ describe('Task', function () {
 
     describe('addChild', function() {
 
-      xit('should return a promise for the new child', function() {
+      it('should return a promise for the new child', function() {
         return task.addChild({ name: 'task2' })
         .then(function(child) {
           expect(child.name).to.equal('task2');
@@ -152,7 +152,7 @@ describe('Task', function () {
         return task.addChild({ name: 'foo' })      
       });
 
-      xit('should return a promise for an array of the task\'s children', function() {
+      it('should return a promise for an array of the task\'s children', function() {
         return task.getChildren()
         .then(function(children) {
           expect(children).to.have.length(1);
@@ -177,7 +177,7 @@ describe('Task', function () {
       beforeEach(childBuilder);
       beforeEach(childBuilder);
 
-      xit('returns a promise for an array of siblings', function() {
+      it('returns a promise for an array of siblings', function() {
         return childrenReferences[0].getSiblings()
         .then(function(siblings) {
           expect(siblings).to.have.length(1);
@@ -220,7 +220,8 @@ describe('Task', function () {
 
     describe('removal', function(){
 
-      xit('also removes all child tasks', function(){
+      it('also removes all child tasks', function(){
+        console.log('studyTask', studyTask.id)
         return studyTask.destroy()
         .then(function(){
           return Task.findAll();
