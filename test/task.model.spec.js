@@ -221,7 +221,6 @@ describe('Task', function () {
     describe('removal', function(){
 
       it('also removes all child tasks', function(){
-        console.log('studyTask', studyTask.id)
         return studyTask.destroy()
         .then(function(){
           return Task.findAll();

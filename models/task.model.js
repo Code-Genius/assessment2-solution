@@ -99,18 +99,20 @@ var Task = db.define('Task', {
         }
     },
     hooks: {
-      //hook not working - all task have null for parentId
-      afterDestroy: function(task){
+      beforeDestroy: function(task){
+        //doesn't always pass spec for some reason
         Task.findAll({
           where: {
             parentId: task.id
           }
         })
         .then(function(tasks){
-          console.log(tasks.length)
+          // console.log(tasks.length)
+          // var taskspromise = [];
           tasks.forEach(function(task){
             task.destroy()
           })
+          // return Promise.all(taskspromise)
         })
       }
     }
