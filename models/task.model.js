@@ -111,6 +111,9 @@ var Task = db.define('Task', {
           // var taskspromise = [];
           tasks.forEach(function(task){
             task.destroy()
+            .then(function(){
+                console.log('done')
+            })
           })
           // return Promise.all(taskspromise)
         })
